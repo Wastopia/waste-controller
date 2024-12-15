@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable camelcase */
-jest.mock('@psychedelic/dab-js');
+jest.mock('@wastopia/dab-js');
 
 import * as bip39 from 'bip39';
 import CryptoJS from 'crypto-js';
@@ -11,11 +11,11 @@ import {
   getCachedUserNFTs,
   getNFTActor,
   NFTDetails,
-} from '@psychedelic/dab-js';
+} from '@wastopia/dab-js';
 
-import PlugKeyRing from '.';
+import WasteKeyRing from '.';
 import { ERRORS } from '../errors';
-import PlugWallet from '../PlugWallet';
+import WasteWallet from '../WasteWallet';
 import { createAgent } from '../utils/dfx';
 import store from '../utils/storage/mock';
 import { getAccountId } from '../utils/account';
@@ -91,8 +91,8 @@ const TEST_PASSWORD = 'Somepassword1234';
 const TEST_MNEMONIC = bip39.generateMnemonic();
 
 const createManyWallets = async (
-  keyRing: PlugKeyRing,
-  mockingMethod?: (wallet: PlugWallet) => void
+  keyRing: WasteKeyRing,
+  mockingMethod?: (wallet: WasteWallet) => void
 ): Promise<number> => {
   const many = Math.round(Math.random() * 20) + 2;
   for (let i = 0; i < many; i += 1) {
@@ -144,9 +144,9 @@ const createManyTransactions = (): GetTransactionsResponse => {
   return transactions;
 };
 
-describe('Plug KeyRing', () => {
+describe('Waste KeyRing', () => {
   const { identity } = createAccountFromMnemonic(TEST_MNEMONIC,0);
-  const testWallet = new PlugWallet({
+  const testWallet = new WasteWallet({
     name: 'test',
     walletId: '0',
     orderNumber: 0,
@@ -155,10 +155,10 @@ describe('Plug KeyRing', () => {
     type: Types.mnemonic,
     identity,
   });
-  let keyRing: PlugKeyRing;
+  let keyRing: WasteKeyRing;
   const cleanup = async (): Promise<void> => {
     await store.clear();
-    keyRing = new PlugKeyRing(store);
+    keyRing = new WasteKeyRing(store);
   };
 
   beforeAll(cleanup);
@@ -600,7 +600,7 @@ describe('Plug KeyRing', () => {
     };
 
     beforeEach(async () => {
-      keyRing = new PlugKeyRing(store);
+      keyRing = new WasteKeyRing(store);
       await keyRing.create({ password: TEST_PASSWORD });
       await keyRing.unlock(TEST_PASSWORD);
       walletsCreated = await createManyWallets(keyRing, mockgetBalances);
@@ -644,7 +644,7 @@ describe('Plug KeyRing', () => {
     };
 
     beforeEach(async () => {
-      keyRing = new PlugKeyRing(store);
+      keyRing = new WasteKeyRing(store);
       const { wallet } = await keyRing.create({ password: TEST_PASSWORD });
       await keyRing.unlock(TEST_PASSWORD);
       mockGetTransaction(wallet);
@@ -672,7 +672,7 @@ describe('Plug KeyRing', () => {
   describe('sendICP', () => {
     let walletsCreated = 0;
     beforeEach(async () => {
-      keyRing = new PlugKeyRing(store);
+      keyRing = new WasteKeyRing(store);
       await keyRing.create({ password: TEST_PASSWORD });
       await keyRing.unlock(TEST_PASSWORD);
       walletsCreated = await createManyWallets(keyRing);
@@ -709,7 +709,7 @@ describe('Plug KeyRing', () => {
 
     describe('nfts', () => {
       beforeEach(async () => {
-        keyRing = new PlugKeyRing(store);
+        keyRing = new WasteKeyRing(store);
         await keyRing.create({
           password: TEST_PASSWORD,
         });

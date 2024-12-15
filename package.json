@@ -57,9 +57,9 @@
     "ts-node": "^9.1.1",
     "typescript": "^4.5"
   },
-  "name": "@psychedelic/plug-controller",
+  "name": "@wastopia/waste-controller",
   "version": "0.25.3",
-  "description": "Internet Computer Plug wallet's controller",
+  "description": "Internet Computer waste wallet's controller",
   "main": "dist/index.js",
   "scripts": {
     "prebuild": "npm run export_version",
@@ -70,29 +70,29 @@
     "lint": "eslint --ext ts,js ./src",
     "watch": "tsc --watch",
     "publish": "npm run build && npm publish",
-    "export_version": "node -p \"'export const PLUG_CONTROLLER_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/constants/version.ts",
-    "add:local": "echo @psychedelic:registry=${LOCAL_REGISTRY:=http://localhost:4873/} > .npmrc && yarn add ${PKG} && echo @psychedelic:registry=https://npm.pkg.github.com > .npmrc"
+    "export_version": "node -p \"'export const WASTE_CONTROLLER_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/constants/version.ts",
+    "add:local": "echo @wastopia:registry=${LOCAL_REGISTRY:=http://localhost:4873/} > .npmrc && yarn add ${PKG} && echo @wastopia:registry=https://npm.pkg.github.com > .npmrc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Psychedelic/plug-controller.git"
+    "url": "git+https://github.com/Wastopia/waste-controller.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@psychedelic"
+    "registry": "https://npm.pkg.github.com/@wastopia"
   },
   "keywords": [
     "ic",
     "dfinity",
-    "plug",
+    "waste",
     "fleek",
-    "psychedelic",
+    "wastopia",
     "crypto",
     "wallet"
   ],
-  "author": "Psychedelic",
+  "author": "Wastopia",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Psychedelic/plug-controller/issues"
+    "url": "https://github.com/Wastopia/waste-controller/issues"
   },
-  "homepage": "https://github.com/Psychedelic/plug-controller#readme"
+  "homepage": "https://github.com/Wastopia/waste-controller#readme"
 }

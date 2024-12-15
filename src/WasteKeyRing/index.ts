@@ -5,16 +5,16 @@ import { BinaryBlob } from '@dfinity/candid';
 import {
   NFTDetails,
   TokenInterfaces,
-} from '@psychedelic/dab-js';
+} from '@wastopia/dab-js';
 import JsonBigInt from 'json-bigint';
 import { v4 as uuid } from "uuid";
 
-import PlugWallet from '../PlugWallet';
-import { PlugStateStorage, PlugStateInstance } from '../interfaces/plug_keyring';
+import WasteWallet from '../WasteWallet';
+import { WasteStateStorage, WasteStateInstance } from '../interfaces/waste_keyring';
 import { GetTransactionsResponse, FormattedTransactions} from '../interfaces/transactions';
 import { KeyringStorage, StorageData } from '../interfaces/storage';
 import { TokenBalance, StandardToken } from '../interfaces/token';
-import { WalletNFTCollection, WalletNFTInfo } from '../interfaces/plug_wallet';
+import { WalletNFTCollection, WalletNFTInfo } from '../interfaces/waste_wallet';
 import { Address } from '../interfaces/contact_registry';
 import { ERRORS, ERROR_CODES } from '../errors';
 import { IdentityFactory } from './../utils/identity/identityFactory'
@@ -43,9 +43,9 @@ import { WALLET_METHODS, MAIN_WALLET_METHODS } from './constants';
 import { getIdentityFromPem } from './../utils/identity/parsePem'
 import Secp256k1KeyIdentity from '../utils/identity/secpk256k1/identity';
 
-class PlugKeyRing {
+class WasteKeyRing {
   // state
-  private state: PlugStateInstance;
+  private state: WasteStateInstance;
   public isUnlocked = false;
   public isInitialized = false;
   public currentWalletId: string;
@@ -135,7 +135,7 @@ class PlugKeyRing {
   };
 
   // Keyring aux methods
-  private getWallet = async (subaccount?: string): Promise<PlugWallet> => {
+  private getWallet = async (subaccount?: string): Promise<WasteWallet> => {
     await this.checkInitialized();
     this.checkUnlocked();
     const uuid = (subaccount ?? this.currentWalletId);
@@ -143,7 +143,7 @@ class PlugKeyRing {
     return this.state?.wallets[uuid];
   };
 
-  private updateWallet = async (wallet: PlugWallet): Promise<void> => {
+  private updateWallet = async (wallet: WasteWallet): Promise<void> => {
     await this.checkUnlocked();
     const wallets = this.state.wallets;
     wallets[wallet.walletId] = wallet;
@@ -198,7 +198,7 @@ class PlugKeyRing {
       const wallets = walletsArray.reduce(
         (walletsAccum, wallet) => ({
           ...walletsAccum,
-          [wallet.walletId]: new PlugWallet({
+          [wallet.walletId]: new WasteWallet({
             ...wallet,
             fetch: this.fetch,
             network: this.networkModule.network,
@@ -251,13 +251,13 @@ class PlugKeyRing {
     name,
     pem,
   }: ImportFromPemOptions
-  ): Promise<PlugWallet> => {
+  ): Promise<WasteWallet> => {
     await this.checkInitialized();
     this.checkUnlocked();
     const walletId = uuid(); 
     const orderNumber = Object.keys(this.state.wallets).length;
     const { identity, type } = getIdentityFromPem(pem);
-    const wallet = new PlugWallet({
+    const wallet = new WasteWallet({
       icon,
       name,
       walletId,
@@ -283,14 +283,14 @@ class PlugKeyRing {
     name,
     secretKey,
   }: ImportFromSecretKey
-  ): Promise<PlugWallet> => {
+  ): Promise<WasteWallet> => {
     await this.checkInitialized();
     this.checkUnlocked();
     const walletId = uuid(); 
     const orderNumber = Object.keys(this.state.wallets).length;
     const buffSecretKey = Buffer.from(secretKey, 'hex');
     const identity = Secp256k1KeyIdentity.fromSecretKey(buffSecretKey);
-    const wallet = new PlugWallet({
+    const wallet = new WasteWallet({
       icon,
       name,
       walletId,
@@ -377,7 +377,7 @@ class PlugKeyRing {
   // Key Management
   public createPrincipal = async (
     opts?: CreatePrincipalOptions
-  ): Promise<PlugWallet> => {
+  ): Promise<WasteWallet> => {
     await this.checkInitialized();
     this.checkUnlocked();
     const mnemonic = await this.getMnemonic(this.state.password as string);
@@ -388,7 +388,7 @@ class PlugKeyRing {
       mnemonic,
       walletNumber
     );
-    const wallet = new PlugWallet({
+    const wallet = new WasteWallet({
       ...opts,
       walletId,
       orderNumber,
@@ -413,7 +413,7 @@ class PlugKeyRing {
   };
 
   // General
-  public getState = async (): Promise<PlugStateStorage> => {
+  public getState = async (): Promise<WasteStateStorage> => {
     await this.checkInitialized();
     this.checkUnlocked();
     return recursiveParseBigint({
@@ -486,7 +486,7 @@ class PlugKeyRing {
     password,
     icon,
     name,
-  }: CreateAndPersistKeyRingOptions): Promise<PlugWallet> => {
+  }: CreateAndPersistKeyRingOptions): Promise<WasteWallet> => {
     if (!password) throw new Error(ERRORS.PASSWORD_REQUIRED);
     const walletId = this.currentWalletId;
     const { identity } = createAccountFromMnemonic(
@@ -494,7 +494,7 @@ class PlugKeyRing {
       0
     );
  
-    const wallet = new PlugWallet({
+    const wallet = new WasteWallet({
       icon,
       name,
       walletId,
@@ -548,7 +548,7 @@ class PlugKeyRing {
   };
 
   // Storage
-  private decryptState = (state, password): PlugStateStorage & { mnemonic: string, networkModule?: NetworkModuleParams } =>
+  private decryptState = (state, password): WasteStateStorage & { mnemonic: string, networkModule?: NetworkModuleParams } =>
     JSON.parse(
       this.crypto.AES.decrypt(state, password).toString(this.crypto.enc.Utf8)
     );
@@ -578,4 +578,4 @@ class PlugKeyRing {
   }
 }
 
-export default PlugKeyRing;
+export default WasteKeyRing;

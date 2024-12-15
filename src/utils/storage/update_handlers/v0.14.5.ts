@@ -1,5 +1,5 @@
 import { TOKENS } from '../../../constants/tokens';
-import { PlugStateStorage } from '../../../interfaces/plug_keyring';
+import { PlugStateStorage } from '../../../interfaces/waste_keyring';
 
 export default (storage: any): PlugStateStorage => ({
   ...storage,

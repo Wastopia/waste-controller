@@ -14,12 +14,12 @@ import {
   removeAddress,
   getAllUserNFTs,
   FungibleMetadata,
-} from '@psychedelic/dab-js';
+} from '@wastopia/dab-js';
 import randomColor from 'random-color';
 
 
 import { ERRORS } from '../errors';
-import { validateCanisterId, validatePrincipalId } from '../PlugKeyRing/utils';
+import { validateCanisterId, validatePrincipalId } from '../WasteKeyRing/utils';
 import { createAgent } from '../utils/dfx';
 import { getICPTransactions } from '../utils/dfx/history/rosetta';
 import { TOKENS, DEFAULT_MAINNET_ASSETS } from '../constants/tokens';
@@ -33,10 +33,10 @@ import { ConnectedApp } from '../interfaces/account';
 import {
   JSONWallet,
   ICNSData,
-  PlugWalletArgs,
+  WasteWalletArgs,
   WalletNFTCollection,
   WalletNFTInfo,
-} from '../interfaces/plug_wallet';
+} from '../interfaces/waste_wallet';
 import { StandardToken, TokenBalance } from '../interfaces/token';
 import { FormattedTransactions } from '../interfaces/transactions';
 import ICNSAdapter from '../utils/dfx/icns';
@@ -45,8 +45,8 @@ import {
   replacePrincipalsForICNS,
 } from '../utils/dfx/icns/utils';
 import { Address } from '../interfaces/contact_registry';
-import { Network } from '../PlugKeyRing/modules/NetworkModule';
-import { RegisteredNFT, RegisteredToken, uniqueTokens } from '../PlugKeyRing/modules/NetworkModule/Network';
+import { Network } from '../WasteKeyRing/modules/NetworkModule';
+import { RegisteredNFT, RegisteredToken, uniqueTokens } from '../WasteKeyRing/modules/NetworkModule/Network';
 import { getAccountId } from '../utils/account';
 import { Types } from '../utils/account/constants';
 import { GenericSignIdentity } from '../utils/identity/genericSignIdentity';
@@ -54,7 +54,7 @@ import { getTokensFromCollections } from '../utils/getTokensFromCollection';
 import { Buffer } from '../../node_modules/buffer';
 import { formatTransactions } from '../utils/formatter/transactionFormatter'
 
-class PlugWallet {
+class WasteWallet {
   name: string;
   icon?: string;
   walletId: string;
@@ -80,7 +80,7 @@ class PlugWallet {
     network,
     identity,
     type,
-  }: PlugWalletArgs) {
+  }: WasteWalletArgs) {
     this.name = name || 'Account 1';
     this.icon = icon;
     this.walletId = walletId;
@@ -530,4 +530,4 @@ class PlugWallet {
   };
 }
 
-export default PlugWallet;
+export default WasteWallet;

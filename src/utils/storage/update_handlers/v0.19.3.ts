@@ -1,5 +1,5 @@
 import { DEFAULT_MAINNET_TOKENS } from '../../../constants/tokens';
-import { Assets, JSONWallet } from '../../../interfaces/plug_wallet';
+import { Assets, JSONWallet } from '../../../interfaces/waste_wallet';
 import { Mainnet } from '../../../PlugKeyRing/modules/NetworkModule/Network';
 
 type JSONWalletLegacy = JSONWallet & { walletNumber: number, assets: Assets }

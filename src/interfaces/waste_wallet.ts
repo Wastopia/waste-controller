@@ -1,5 +1,5 @@
-import { NFTCollection } from '@psychedelic/dab-js';
-import { Network, NetworkModuleParams } from '../PlugKeyRing/modules/NetworkModule';
+import { NFTCollection } from '@wastopia/dab-js';
+import { Network, NetworkModuleParams } from '../WasteKeyRing/modules/NetworkModule';
 import { ConnectedApp } from './account';
 import { TokenBalance } from './token';
 import { Types } from '../utils/account/constants';
@@ -11,7 +11,7 @@ export interface ICNSData {
     reverseResolvedName?: string;
   }
   
-export interface PlugWalletArgs {
+export interface WasteWalletArgs {
     name?: string;
     walletId: string;
     orderNumber: number;

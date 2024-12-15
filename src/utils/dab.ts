@@ -1,12 +1,12 @@
 import {
   getCanisterInfo as getCanisterInfoFromDab,
   getMultipleCanisterInfo as getMultipleCanisterInfoFromDab,
-} from '@psychedelic/dab-js';
+} from '@wastopia/dab-js';
 import { HttpAgent } from '@dfinity/agent';
 import { Principal } from '@dfinity/principal';
 import crossFetch from 'cross-fetch';
 
-import { PLUG_PROXY_HOST } from './dfx/constants';
+import { WASTE_PROXY_HOST } from './dfx/constants';
 import { wrappedFetch } from './dfx/wrappedFetch';
 
 export interface CanisterInfo {
@@ -24,7 +24,7 @@ export const getCanisterInfo = async (
   const finalAgent =
     agent ||
     new HttpAgent({
-      host: PLUG_PROXY_HOST,
+      host: WASTE_PROXY_HOST,
       fetch: fetch ? wrappedFetch(fetch) : wrappedFetch(),
     });
 
@@ -44,7 +44,7 @@ export const getMultipleCanisterInfo = async (
   const finalAgent =
     agent ||
     new HttpAgent({
-      host: PLUG_PROXY_HOST,
+      host: WASTE_PROXY_HOST,
       fetch: fetch ? wrappedFetch(fetch) : wrappedFetch(),
     });
 

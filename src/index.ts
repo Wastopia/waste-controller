@@ -1,10 +1,10 @@
-import PlugKeyRing from './PlugKeyRing';
+import WasteKeyRing from './WasteKeyRing';
 import { getAccountId } from './utils/account';
 import { getCanisterInfo, getMultipleCanisterInfo } from './utils/dab';
 import { decode, encode } from './utils/idl';
 
 export default {
-  PlugKeyRing,
+  WasteKeyRing,
   getAccountId,
   getCanisterInfo,
   getMultipleCanisterInfo,

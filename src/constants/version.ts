@@ -1,1 +1,1 @@
-export const PLUG_CONTROLLER_VERSION = "0.25.3";
+export const WASTE_CONTROLLER_VERSION = "0.25.3";

@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { getNFTActor, getTokenActor, NFTCollection, standards } from "@psychedelic/dab-js";
+import { getNFTActor, getTokenActor, NFTCollection, standards } from "@wastopia/dab-js";
 import { SignIdentity } from '@dfinity/agent';
 
 import { ERRORS } from "../../../errors";

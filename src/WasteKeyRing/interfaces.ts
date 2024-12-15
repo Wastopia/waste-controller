@@ -1,7 +1,7 @@
-import PlugWallet from "../PlugWallet";
+import WasteWallet from "../WasteWallet";
 import { ERROR_CODES }  from "../errors"
 
-export interface CreateImportResponse { wallet: PlugWallet; mnemonic: string; }
+export interface CreateImportResponse { wallet: WasteWallet; mnemonic: string; }
 
 export interface CreatePrincipalOptions {
   name?: string;

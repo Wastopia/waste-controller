@@ -1,4 +1,4 @@
-import { standards } from '@psychedelic/dab-js';
+import { standards } from '@wastopia/dab-js';
 
 import { LEDGER_CANISTER_ID } from '../utils/dfx/constants';
 

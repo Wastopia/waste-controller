@@ -6,7 +6,7 @@ import handler19_3 from './update_handlers/v0.19.3';
 import handler20_0 from './update_handlers/v0.20.0';
 import handler21_0 from './update_handlers/v0.21.0';
 
-import { PlugStateStorage } from '../../interfaces/plug_keyring';
+import { PlugStateStorage } from '../../interfaces/waste_keyring';
 import { NetworkModuleParams } from '../../PlugKeyRing/modules/NetworkModule';
 
 export const isEmpty = (obj): boolean => Object.keys(obj).length === 0;
